@@ -2,13 +2,8 @@ module Bowling
   class Game 
 
   def score(pins)
-    case pins.size
-    when 1
-      pins.first
-    when 2
-      pins[0] + pins[1]
-    when 3
-      pins.first(3).inject(&:+)
+    if (1..3).include? pins.size
+      pins.inject(&:+)
     else
       if strike?(pins)
         score_strike(pins) + score_rest_of({:pins => pins, :less => 1 })
